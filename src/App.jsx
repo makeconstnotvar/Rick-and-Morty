@@ -30,8 +30,8 @@ export default function App() {
   const [pages, setPages] = useState([]);
 
   useEffect(search, [filter]);
-  
-  function search () {
+
+  function search() {
     axios.get('https://rickandmortyapi.com/api/character', { params: { ...filter } })
       .then(resp => {
         setPers(resp.data.results);
@@ -39,7 +39,7 @@ export default function App() {
         setPages(getPages(resp.data.info.pages))
       })
   }
-  
+
   function getPages(total) {
     let pages = []
     if (total != null) {
@@ -48,13 +48,13 @@ export default function App() {
     return pages;
   };
 
-  function pageHandler (page)  {
+  function pageHandler(page) {
     if (page < 1) page = 1;
     if (page > info.pages) page = info.pages;
     handleFilter('page', page);
   };
 
-  function handleFilter (field, value) {
+  function handleFilter(field, value) {
     setFilter(prev => ({ ...prev, ...{ [field]: value } }))
   }
 
@@ -118,8 +118,8 @@ export default function App() {
                 <img src={x.image} alt={x.name} />
                 <div className='card-info'>
                   <div className='card-name'>{x.name}</div>
-                  { 
-                    x.type && 
+                  {
+                    x.type &&
                     <div className='card-status'>Type: {x.type}</div>
                   }
                   <div className='card-status'>Status: {x.status} <span className={`card-status-icon ${x.status.toLowerCase()}`} /></div>
